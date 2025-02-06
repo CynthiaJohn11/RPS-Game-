@@ -1,0 +1,471 @@
+ @import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ :root {
+     /* ## Colors
+    ### Primary */
+     --Scissors: hsl(39, 89%, 49%);
+     --Paper: hsl(230, 89%, 62%);
+     --Rock: hsl(349, 71%, 52%);
+     --Lizard: hsl(261, 73%, 60%);
+     --Cyan: hsl(189, 59%, 53%);
+     /* ### Neutral */
+     --Dark-Text: hsl(229, 25%, 31%);
+     --Score-Text: hsl(229, 64%, 46%);
+     --Header-Outline: hsl(217, 16%, 45%);
+     /* ### Background */
+     --Radial-Gradient: hsl(214, 47%, 23%) to hsl(237, 49%, 15%);
+ }
+
+ body {
+     position: relative;
+     min-height: 100vh;
+     background: radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+     font-family: "Barlow Semi Condensed", sans-serif;
+ }
+
+ .darkBody {
+     background: radial-gradient(hsl(214, 47%, 10%), hsl(237, 49%, 10%));
+ }
+
+ .header-section {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     width: 100%;
+     max-width: 600px;
+     height: 120px;
+     margin: 40px auto;
+     padding: 1rem;
+     padding-left: 1.4rem;
+     border: 2px solid var(--Header-Outline);
+     border-radius: 15px;
+ }
+
+ .header-section img {
+     width: 90px;
+     height: auto;
+ }
+
+ .header-section div {
+     background-color: #fff;
+     width: 120px;
+     height: 90px;
+     border-radius: 6px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+ }
+
+ .scoreText {
+     color: var(--Score-Text);
+     text-transform: uppercase;
+     font-weight: 600;
+ }
+
+ .score {
+     color: var(--Dark-Text);
+     font-size: 3rem;
+     font-weight: 700;
+ }
+
+ .startGame {
+     position: relative;
+     width: 100%;
+     max-width: 400px;
+     height: 350px;
+     padding: 2rem;
+     margin: 50px auto;
+     margin-bottom: 80px;
+     background: url("images/bg-pentagon.svg");
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ button {
+     width: 95px;
+     height: 90px;
+     border-radius: 50%;
+     margin-left: 40px;
+     margin-bottom: 40px;
+     border: 0;
+ }
+
+ .scissorsbtn {
+     position: absolute;
+     top: 0;
+     left: 25%;
+     box-shadow: inset 1px 8px hsl(0, 20%, 88%, 0.7),
+         0px 8px 0px 15px hsl(39, 89%, 37%);
+     outline: 16px solid hsl(40, 84%, 53%);
+ }
+
+ .rockbtn {
+     position: absolute;
+     right: 60px;
+     bottom: -15%;
+     box-shadow: inset 1px 8px hsl(0, 20%, 88%, 0.7),
+         0px 8px 0px 15px hsl(349, 71%, 52%);
+     outline: 16px solid hsl(349, 70%, 56%);
+ }
+
+ .lizardbtn {
+     position: absolute;
+     bottom: -15%;
+     left: 15px;
+     box-shadow: inset 1px 8px hsl(0, 20%, 88%, 0.7),
+         0px 8px 0px 15px hsl(261, 73%, 60%);
+     outline: 16px solid hsl(261, 72%, 63%);
+ }
+
+ .spockbtn {
+     position: absolute;
+     left: -50px;
+     top: 30%;
+     box-shadow: inset 1px 8px hsl(0, 20%, 88%, 0.7),
+         0px 8px 0px 15px hsl(189, 59%, 43%);
+     outline: 16px solid hsl(189, 58%, 57%);
+ }
+
+ .paperbtn {
+     position: absolute;
+     right: 0;
+     top: 30%;
+     box-shadow: inset 1px 8px hsl(0, 20%, 88%, 0.7),
+         0px 8px 0px 15px hsl(230, 89%, 60%);
+     outline: 16px solid hsl(230, 89%, 65%);
+ }
+
+ .inGame {
+     width: 100%;
+     max-width: 850px;
+     display: flex;
+     margin: 50px auto;
+     justify-content: center;
+     display: none;
+ }
+
+ .player,
+ .house,
+ .status {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+
+ .house {
+     margin-left: 30px;
+ }
+
+ .player {
+     margin-right: 30px;
+ }
+
+ .winnerEffect {
+     position: relative;
+     width: 400px;
+     height: 400px;
+     margin-top: -60px;
+     margin-right: -60px;
+     margin-left: -60px;
+     justify-content: center;
+     border-radius: 50%;
+     background: repeating-radial-gradient(circle at center, hsl(233, 44%, 12%, 0.5)10px, hsl(229, 25%, 31%, 0.0001)2%, hsl(214, 43%, 22%, 0.9) 20%);
+     background-position: center;
+ }
+
+ .status {
+     display: none;
+     margin-top: 50px;
+     align-self: center;
+     z-index: 2;
+ }
+
+ #playAgain {
+     height: 35px;
+     width: 150px;
+     border-radius: 8px;
+     text-transform: uppercase;
+     font-weight: 600;
+     font-size: 0.8rem;
+     color: var(--Dark-Text);
+     display: grid;
+     place-content: center;
+     margin-top: 5px;
+ }
+
+ .player p,
+ .house p {
+     color: #fff;
+     font-weight: 700;
+     text-transform: uppercase;
+     font-size: 1.1rem;
+     margin-bottom: 55px;
+     padding-left: 10px;
+     letter-spacing: 1px;
+ }
+
+ .status p {
+     color: #fff;
+     font-weight: 700;
+     text-transform: uppercase;
+     font-size: 1.8rem;
+     padding-left: 30px;
+ }
+
+ .inGame button {
+     background-color: #fff;
+     width: 160px;
+     height: 160px;
+ }
+
+ .house button {
+     background-color: hsl(237, 49%, 15%, 0.5);
+     width: 160px;
+     height: 160px;
+     justify-self: center;
+ }
+
+ .scissors {
+     box-shadow: inset 1px 9px hsl(0, 20%, 88%, 0.7),
+         0px 12px 0px 20px hsl(39, 89%, 37%);
+     outline: 24px solid hsl(40, 84%, 53%);
+ }
+
+ .rock {
+     box-shadow: inset 1px 8px hsl(0, 20%, 88%, 0.7),
+         0px 12px 0px 20px hsl(349, 71%, 52%);
+     outline: 24px solid hsl(349, 70%, 56%);
+ }
+
+ .lizard {
+     box-shadow: inset 1px 8px hsl(0, 20%, 88%, 0.7),
+         0px 12px 0px 20px hsl(261, 73%, 60%);
+     outline: 24px solid hsl(261, 72%, 63%);
+ }
+
+ .spock {
+     box-shadow: inset 1px 8px hsl(0, 20%, 88%, 0.7),
+         0px 12px 0px 20px hsl(189, 59%, 43%);
+     outline: 24px solid hsl(189, 58%, 57%);
+ }
+
+ .paper {
+     box-shadow: inset 1px 8px hsl(0, 20%, 88%, 0.7),
+         0px 12px 0px 20px hsl(230, 89%, 60%);
+     outline: 24px solid hsl(230, 89%, 65%);
+ }
+
+ .rules {
+     display: none;
+     width: 380px;
+     height: 400px;
+     background-color: #fff;
+     flex-direction: column;
+     border-radius: 10px;
+     margin: auto;
+     position: relative;
+     position: absolute;
+     top: 80px;
+     left: 36%;
+     z-index: 99;
+ }
+
+ .rules h2 {
+     padding-left: 1.4rem;
+     padding-top: 1.4rem;
+     padding-right: 1.4rem;
+     display: flex;
+     justify-content: space-between;
+     text-transform: uppercase;
+     color: var(--Dark-Text);
+ }
+
+ .rules button {
+     width: fit-content;
+     height: auto;
+     background-color: transparent;
+     margin-top: 10px;
+     position: absolute;
+     top: 0;
+     right: 0;
+     padding-right: 40px;
+     padding-top: 1rem;
+ }
+
+ .rules figure {
+     margin: auto;
+     width: 80%;
+     flex: 1;
+ }
+
+ .rules img {
+     width: 100%;
+     height: auto;
+ }
+
+ .rulesbtn {
+     border-radius: 8px;
+     height: 40px;
+     width: 120px;
+     border: 2px solid var(--Header-Outline);
+     background-color: transparent;
+     color: #fff;
+     text-transform: uppercase;
+     font-weight: 600;
+     letter-spacing: 0.1rem;
+     margin-right: 50px;
+     margin-bottom: 40px;
+ }
+
+ footer {
+     position: absolute;
+     bottom: 0;
+     right: 0;
+ }
+
+ @media screen and (max-width: 475px) {
+     body {
+         display: flex;
+         flex-direction: column;
+     }
+
+     main {
+         flex: 1;
+         position: relative;
+     }
+
+     .header-section {
+         width: 90%;
+     }
+
+     .header-section div {
+         width: 100px;
+     }
+
+     .header-section img {
+         width: 70px;
+     }
+
+     .startGame {
+         width: 80%;
+     }
+
+     .lizardbtn {
+         left: -20px;
+     }
+
+     .rockbtn {
+         right: 30px;
+     }
+
+     .scissorsbtn {
+         left: 20%;
+     }
+
+     .rules {
+         top: 0;
+         left: 0;
+         min-height: 100vh;
+         width: 100%;
+         display: flex;
+         flex-direction: column;
+         justify-content: space-around;
+         align-items: center;
+         display: none;
+     }
+
+     .rules h2 {
+         color: var(--Dark-Text);
+         font-size: 2.5rem;
+         text-transform: uppercase;
+         margin-top: 50px;
+     }
+
+     .rules button {
+         width: 30px;
+         position: static;
+         padding: 0;
+     }
+
+     .rules figure {
+         margin: 0;
+         flex: 0;
+         align-self: center;
+         width: 90%;
+     }
+
+     .rulesbtn {
+         height: 50px;
+         width: 150px;
+         font-size: 1.2rem;
+         border: 3px solid var(--Header-Outline);
+     }
+
+     .inGame {
+         width: 90%;
+         margin-top: 100px;
+     }
+
+     .player,
+     .house {
+         flex-direction: column-reverse;
+         gap: 30px;
+         margin-bottom: 80px;
+     }
+
+     .player button {
+         width: 110px;
+         height: 110px;
+     }
+
+     .house button {
+         width: 110px;
+         height: 110px;
+         margin-right: 30px;
+     }
+
+     .status {
+         position: absolute;
+         bottom: 0px;
+         margin: auto;
+     }
+
+     .winnerEffect {
+         background: none;
+         width: auto;
+         height: auto;
+         margin-top: 0px;
+         margin-right: 0px;
+         margin-left: 0px;
+     }
+
+     #playAgain {
+         width: 250px;
+         height: 60px;
+         font-size: 1.2rem;
+     }
+
+     .status p {
+         font-size: 3rem;
+         margin-bottom: 10px;
+     }
+
+     footer {
+         position: static;
+         align-self: center;
+         margin-bottom: 50px;
+     }
+ }
+
+ @media screen and (max-width:830px) and (min-width:475px) {
+     .rules {
+         left: 28%;
+     }
+ }

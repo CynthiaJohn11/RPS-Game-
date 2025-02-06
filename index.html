@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+
+    <title>Frontend Mentor | Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+</head>
+
+<body id="body">
+    <header class="non-rules">
+        <section class="header-section">
+            <figure>
+                <img src="images/logo-bonus.svg" alt="" />
+            </figure>
+            <div>
+                <p class="scoreText">Score</p>
+                <p class="score" id="score"></p>
+            </div>
+        </section>
+    </header>
+    <main class="non-rules">
+        <section class="startGame">
+            <button class="scissorsbtn gameButtons"><img src="images/icon-scissors.svg" alt="" /></button>
+            <button class="spockbtn gameButtons"><img src="images/icon-spock.svg" alt="" /></button>
+            <button class="lizardbtn gameButtons"><img src="images/icon-lizard.svg" alt="" /></button>
+            <button class="rockbtn gameButtons"><img src="images/icon-rock.svg" alt="" /></button>
+            <button class="paperbtn gameButtons"><img src="images/icon-paper.svg" alt="" /></button>
+        </section>
+        <section class="inGame">
+            <div class="player">
+                <p>You picked</p>
+                <button class="scissors" id="userChoice"><img src="images/icon-scissors.svg" alt=""></button>
+            </div>
+            <div class="status">
+                <p id="result">You Lose</p>
+                <button id="playAgain">play again</button>
+            </div>
+            <div class="house">
+                <p>The house picked</p>
+                <button class=" housebtn" id="houseChoice">
+                </button>
+            </div>
+        </section>
+    </main>
+    <section class="rules" id="rules">
+        <h2>Rules</h2>
+        <figure>
+            <img src="images/image-rules-bonus.svg" alt="">
+        </figure>
+        <button id="close"><img src="images/icon-close.svg" alt=""></button>
+    </section>
+    <footer class="non-rules">
+        <button class="rulesbtn">Rules</button>
+    </footer>
+</body>
+
+</html>
